@@ -15,7 +15,7 @@ def analizar_vix(vix_df, vix_actual, strike, dias_vencimiento):
     prob_ITM = 1 - prob_OTM  # VIX termina por debajo del strike
     
     # Calcular prima breakeven: el promedio de pérdidas en puts vendidas
-    perdidas = np.maximum(strike - vix_futuro, 0)
+    perdidas = np.maximum(vix_futuro - strike, 0)  # Para calls (correcto)
     prima_breakeven = perdidas.mean()
     
     # Graficar distribución del VIX en el vencimiento
@@ -39,4 +39,4 @@ def analizar_vix(vix_df, vix_actual, strike, dias_vencimiento):
 
 # Ejemplo de uso
 vix = pd.read_csv("vix.csv")
-analizar_vix(vix, vix_actual=18, strike=20, dias_vencimiento=5)
+analizar_vix(vix, vix_actual=14.48, strike=25, dias_vencimiento=3)
